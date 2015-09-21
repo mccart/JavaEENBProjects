@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+  <listener>
+    <description>ServletContextListener</description>
+    <listener-class>trader.web.SchedulerContextListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>interval</param-name>
+    <param-value>10</param-value>
+  </context-param>
+  <context-param>
+    <param-name>stocks</param-name>
+    <param-value>SUNW</param-value>
+  </context-param>
+</web-app>

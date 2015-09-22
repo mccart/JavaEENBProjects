@@ -5,13 +5,13 @@
  */
 package test;
 
-import javax.ejb.Stateless;
+import javax.ejb.*;
 
 /**
  *
  * @author mccart
  */
-@Stateless
+@Stateless //@Remote
 public class SimpleSession implements SimpleSessionRemote {
 
     public String getMessage() {

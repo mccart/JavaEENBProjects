@@ -5,22 +5,37 @@
  */
 package trader;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.*;
+
 /**
  *
  * @author mccart
  */
 public class BrokerDelegate {
 
-    private BrokerModel model = BrokerModelImpl.getInstance();
+    //private BrokerModel model = BrokerModelImpl.getInstance();
+    // ejb lab session...
+    private BrokerModel model;
     
-    // Singleton design - instantiated only once
+    // Singleton design - instantiated only once with empty constructor
     private static BrokerDelegate instance = new BrokerDelegate();
     
     public static BrokerDelegate getInstance() {
         return instance;
     }
     
-    private BrokerDelegate() {}
+    private BrokerDelegate() {
+        // added for ejb lab session...
+        try {
+            Context ctx = new InitialContext();
+            model = (BrokerModel) ctx.lookup("java:comp/env/BrokerLookup");
+        } catch (NamingException ex) {
+            Logger.getLogger(BrokerDelegate.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException(ex);
+        }
+    }
         
     public Customer addCustomer(String customerId, String name, String address) throws BrokerException {
         model.addCustomer(new Customer(customerId, name, address));

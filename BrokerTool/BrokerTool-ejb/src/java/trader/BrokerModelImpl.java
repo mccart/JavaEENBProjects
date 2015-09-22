@@ -2,25 +2,28 @@
 package trader;
 
 import java.util.*;
-import trader.Customer;
-import trader.CustomerShare;
-import trader.Stock;
+import javax.ejb.*;
+import trader.*;
 
-
+@Remote @Stateful
 public class BrokerModelImpl implements BrokerModel{
     
     private List<Customer> customers = new ArrayList<Customer>();
     private List<CustomerShare> shares = new ArrayList<CustomerShare>();
     private List<Stock> stocks = new ArrayList<Stock>();
 
+    /* Changes for elb lab...
+    // "static" Singleton design - instantiated only once 
     private static BrokerModel instance = new BrokerModelImpl();
     
     public static BrokerModel getInstance() {
         return instance;
     }
         
-    /** Creates a new instance of BrokerModelImpl */
-    private BrokerModelImpl(){
+    // private constructor for Singleton design
+    private ...*/
+    // Creates a new instance of BrokerModelImpl
+    public BrokerModelImpl(){
         customers.add(new Customer("111-11-1111", "Test Customer", "2222 Easy Street, West Beach AZ"));
         customers.add(new Customer("999-45-9034", "Asok Perumainar", "1444 England Lane, Broomfield CO"));
         customers.add(new Customer("999-78-9012", "Anthony Orapallo", "123 Tea Street, Columbia MD"));

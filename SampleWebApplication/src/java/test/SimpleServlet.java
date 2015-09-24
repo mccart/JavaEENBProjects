@@ -19,7 +19,7 @@ import javax.ejb.*;
  */
 public class SimpleServlet extends HttpServlet {
 
-    @EJB private SimpleSessionRemote simpleSessionBean;
+    @EJB private SimpleSessionRemote simpleSession;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,8 +43,8 @@ public class SimpleServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet SimpleServlet at " + request.getContextPath() + "</h1>");
             out.println("Servlet generated at: " + new java.util.Date());
-            // EJB call
-            out.println("<br/><br/>Message: " + simpleSessionBean.getMessage());
+            // EJB call, deploy EJB before deploy web... undeploy both first...
+            out.println("<br/><br/>Message: " + simpleSession.getMessage());
             out.println("</body>");
             out.println("</html>");
         }

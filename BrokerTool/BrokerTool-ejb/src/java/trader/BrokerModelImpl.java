@@ -3,11 +3,15 @@ package trader;
 
 import java.util.*;
 import javax.ejb.*;
+import javax.persistence.*;
+
 import trader.*;
 
-@Remote @Stateful
+@Remote @Stateless
 public class BrokerModelImpl implements BrokerModel{
     
+    @PersistenceContext private EntityManager em;
+       
     private List<Customer> customers = new ArrayList<Customer>();
     private List<CustomerShare> shares = new ArrayList<CustomerShare>();
     private List<Stock> stocks = new ArrayList<Stock>();
@@ -130,10 +134,11 @@ public class BrokerModelImpl implements BrokerModel{
      */
     public Customer[] getAllCustomers()
     throws BrokerException{
-        return customers.toArray(new Customer[0]);
+//        return customers.toArray(new Customer[0]);
+        Query query = em.createNativeQuery("SELECT * FROM Customer ", Customer.class);
+        List<Customer> customers = (List<Customer>) query.getResultList();
+        return (Customer[]) customers.toArray(new Customer[0]);
     }
-
-
     
     
     public CustomerShare[] getAllCustomerShares(String customerId) throws BrokerException {

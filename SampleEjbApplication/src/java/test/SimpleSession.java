@@ -15,7 +15,7 @@ import javax.ejb.*;
 public class SimpleSession implements SimpleSessionRemote {
 
     public String getMessage() {
-        return "Hello EJB World";
+        return "Hello EJB World - Yay";
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
